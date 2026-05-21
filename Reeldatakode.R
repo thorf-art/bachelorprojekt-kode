@@ -7,7 +7,10 @@ library(readxl)
 # 1. Indlæs data
 # ------------------------------------------------------------
 
-raw <- read_excel("data/Data10.xlsx", sheet = 1)
+raw <- read_excel(
+  "/Users/thor/OneDrive/Skrivebord/6.semester/bachelor/Data/Data10.xlsx",
+  sheet = 3
+)
 dates    <- as.Date(raw[[1]])
 prices   <- as.matrix(raw[, -1])
 assets   <- colnames(raw)[-1]
@@ -19,7 +22,9 @@ dates_r <- dates[-1]
 T_total <- nrow(log_ret)
 
 # Risikofri rente (FRED TB3MS)
-rf_raw <- read.csv("data/TB3MS.csv")
+rf_raw <- read.csv(
+  "/Users/thor/OneDrive/Skrivebord/6.semester/bachelor/Data/TB3MS.csv"
+)
 rf_raw$DATE       <- as.Date(rf_raw$observation_date)
 rf_raw$rf_monthly <- log(1 + as.numeric(rf_raw$TB3MS) / 100) / 12
 rf_map     <- setNames(rf_raw$rf_monthly, format(rf_raw$DATE, "%Y-%m"))
